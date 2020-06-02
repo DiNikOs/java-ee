@@ -5,4 +5,12 @@
          version="4.0">
 
   <display-name>Archetype Created Web Application</display-name>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/400.html</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/400.html</location>
+  </error-page>
 </web-app>
