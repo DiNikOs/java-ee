@@ -17,6 +17,7 @@
 
   <modules>
     <module>firstapp</module>
+    <module>firstapp_jsp</module>
   </modules>
 
   <build>
