@@ -7,9 +7,10 @@
 <html>
 <head>
     <title>Error</title>
+    <meta charset="utf-8">
 </head>
 <body>
     <h1>Error!</h1>
-    <li style="display: inline-block"><a href="main">Вернуться на главную</a></li>
+    <li style="display: inline-block"><a href="/firstapp_jsp/main">Вернуться на главную</a></li>
 </body>
 </html>

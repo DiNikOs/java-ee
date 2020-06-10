@@ -12,5 +12,27 @@
 <body>
     <%@ include file="/WEB-INF/views/menu.jspf" %>
     <h1>Товар</h1>
+    <table border="1">
+        <tr>
+            <th>Номер</th>
+            <th>Товар</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+            <tr>
+                <c:url value="/product/savecart" var="save_cartUrl">
+                    <c:param name="id" value="${product.id}"/>
+                    <c:param name="prod" value="${product}"/>
+                </c:url>
+                <td>${product.id}</td>
+                <td>${product.name}</td>
+                <td>${product.description}</td>
+                <td>${product.price}</td>
+                <td><a href="${save_cartUrl}">Сохранить в конзину</a></td>
+
+            </tr>
+
+    </table>
 </body>
 </html>
