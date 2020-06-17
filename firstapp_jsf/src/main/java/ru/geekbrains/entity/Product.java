@@ -27,7 +27,7 @@ public class Product implements Serializable {
     private String description;
 
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
 
     @ManyToOne(optional = false)
     private Category category;
@@ -39,7 +39,7 @@ public class Product implements Serializable {
 //
 //    }
 
-    public Product(Long id, String name, String description, double price, Category category, Date localDate) {
+    public Product(Long id, String name, String description, BigDecimal price, Category category, Date localDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -72,11 +72,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

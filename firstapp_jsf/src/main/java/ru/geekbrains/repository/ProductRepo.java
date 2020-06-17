@@ -16,7 +16,10 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.sql.Connection;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,17 +33,23 @@ public class ProductRepo {
     @Inject
     private Category category;
 
+    @Inject
+    private ServletContext servletContext;
+
     @PersistenceContext(unitName = "db_firstapp")
     private EntityManager entityManager;
+
+    public ProductRepo() {
+    }
 
     @PostConstruct
     public void init() {
         LocalDateTime localDateTime = LocalDateTime.now();
         Long data = localDateTime.toEpochSecond(ZoneOffset.UTC);
         if (this.findAll().isEmpty()) {
-            this.insert(new Product(-1L, "First", "Discription", 100.00, category, new Date(data)));
-            this.insert(new Product(-1L, "Two", "Discription", 100.00, category, new Date(data)));
-            this.insert(new Product(-1L, "Three", "Discription", 100.00, category, new Date(data)));
+            this.insert(new Product(-1L, "First", "Discription", bd(150), category, new Date(data)));
+            this.insert(new Product(-1L, "Two", "Discription", bd(150), category, new Date(data)));
+            this.insert(new Product(-1L, "Three", "Discription", bd(150), category, new Date(data)));
         }
     }
 
@@ -68,5 +77,10 @@ public class ProductRepo {
 
     public List<Product> findAll() {
         return entityManager.createQuery("from Product", Product.class).getResultList();
+    }
+
+    public BigDecimal bd (int big){
+        BigDecimal bd = new BigDecimal(big);
+        return bd;
     }
 }

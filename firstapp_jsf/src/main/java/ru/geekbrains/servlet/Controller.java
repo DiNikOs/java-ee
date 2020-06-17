@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,14 +39,19 @@ public class Controller extends HttpServlet {
     public void init() throws ServletException {
         LocalDateTime localDateTime = LocalDateTime.now();
         Long data = localDateTime.toEpochSecond(ZoneOffset.UTC);
-        products.add(new Product(1L, "Пицца", "4 сыра", 200.00, null, new Date(data)));
-        products.add(new Product(2L, "Суши", "Филаделфия", 150.00, null, new Date(data)));
-        products.add(new Product(3L, "Роллы", "Кирияки", 200.00, null, new Date(data)));
-        products.add(new Product(4L, "Салат", "Цезарь", 180.00, null, new Date(data)));
-        products.add(new Product(5L, "Гарнир", "Картофильное пюре", 80.00, null, new Date(data)));
-        products.add(new Product(6L, "Закуски", "Овощная нарезка", 100.00, null, new Date(data)));
-        products.add(new Product(7L, "Десерт", "Жаренные бананы", 300.00, null, new Date(data)));
-        products.add(new Product(8L, "Напитки", "Коктель молотова", 700.00, null, new Date(data)));
-        products.add(new Product(9L, "Мясо", "Бараний стейк", 500.00, null, new Date(data)));
+        products.add(new Product(1L, "Пицца", "4 сыра", bd(180), null, new Date(data)));
+        products.add(new Product(2L, "Суши", "Филаделфия", bd(150), null, new Date(data)));
+        products.add(new Product(3L, "Роллы", "Кирияки", bd(150), null, new Date(data)));
+        products.add(new Product(4L, "Салат", "Цезарь", bd(150), null, new Date(data)));
+        products.add(new Product(5L, "Гарнир", "Картофильное пюре", bd(150), null, new Date(data)));
+        products.add(new Product(6L, "Закуски", "Овощная нарезка", bd(150), null, new Date(data)));
+        products.add(new Product(7L, "Десерт", "Жаренные бананы", bd(150), null, new Date(data)));
+        products.add(new Product(8L, "Напитки", "Коктель молотова", bd(150), null, new Date(data)));
+        products.add(new Product(9L, "Мясо", "Бараний стейк", bd(150), null, new Date(data)));
+    }
+
+    public BigDecimal bd (int big){
+        BigDecimal bd = new BigDecimal(big);
+        return bd;
     }
 }
