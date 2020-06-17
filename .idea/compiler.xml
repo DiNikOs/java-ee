@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="firstapp" />
+        <module name="firstapp_jsf" />
         <module name="firstapp_jsp" />
+        <module name="firstapp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="firstapp" target="1.8" />
+      <module name="firstapp_jsf" target="1.8" />
       <module name="firstapp_jsp" target="1.8" />
       <module name="java-ee" target="1.8" />
     </bytecodeTargetLevel>

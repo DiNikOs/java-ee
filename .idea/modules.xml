@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/firstapp/firstapp.iml" filepath="$PROJECT_DIR$/firstapp/firstapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/firstapp_jsf/firstapp_jsf.iml" filepath="$PROJECT_DIR$/firstapp_jsf/firstapp_jsf.iml" />
       <module fileurl="file://$PROJECT_DIR$/firstapp_jsp/firstapp_jsp.iml" filepath="$PROJECT_DIR$/firstapp_jsp/firstapp_jsp.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-ee.iml" filepath="$PROJECT_DIR$/java-ee.iml" />
     </modules>
