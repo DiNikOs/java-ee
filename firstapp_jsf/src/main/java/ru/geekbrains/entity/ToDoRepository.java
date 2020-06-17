@@ -19,7 +19,7 @@ public class ToDoRepository {
     private static final Logger logger = LoggerFactory.getLogger(ToDoRepository.class);
 
     @PersistenceContext(unitName = "ds")
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @PostConstruct
     public void init() {
@@ -32,27 +32,27 @@ public class ToDoRepository {
 
     @Transactional
     public void insert(ToDo toDo) {
-        em.persist(toDo);
+        entityManager.persist(toDo);
     }
 
     @Transactional
     public void update(ToDo toDo) {
-        em.merge(toDo);
+        entityManager.merge(toDo);
     }
 
     @Transactional
     public void delete(long id) {
-        ToDo toDo = em.find(ToDo.class, id);
+        ToDo toDo = entityManager.find(ToDo.class, id);
         if (toDo != null) {
-            em.remove(toDo);
+            entityManager.remove(toDo);
         }
     }
 
     public ToDo findById(long id) {
-        return em.find(ToDo.class, id);
+        return entityManager.find(ToDo.class, id);
     }
 
     public List<ToDo> findAll() {
-        return em.createQuery("from ToDo", ToDo.class).getResultList();
+        return entityManager.createQuery("from ToDo", ToDo.class).getResultList();
     }
 }

@@ -23,7 +23,7 @@ public class OrderItem {
 
     private static final Logger logger = LoggerFactory.getLogger(ToDoRepository.class);
 
-    @PersistenceContext(unitName = "db_firstapp")
+    @PersistenceContext(unitName = "ds")
     private EntityManager em;
 
     @PostConstruct

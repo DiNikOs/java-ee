@@ -36,7 +36,7 @@ public class ProductRepo {
     @Inject
     private ServletContext servletContext;
 
-    @PersistenceContext(unitName = "db_firstapp")
+    @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
 
     public ProductRepo() {

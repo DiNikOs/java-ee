@@ -21,7 +21,7 @@ public class CategoryRepo {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryRepo.class);
 
-    @PersistenceContext(unitName = "db_firstapp")
+    @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
 
     @PostConstruct
