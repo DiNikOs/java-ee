@@ -32,42 +32,78 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active"><a class="nav-link" href="/firstapp_jsp/main">Главная <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/catalog">Каталог</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/product">Товар</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/cart">Корзина</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/order">Оформить заказ</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/firstapp_jsp/index">
+                    <h:link value=" Главная " outcome="index"/> <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/catalog">
+                    <h:link value=" Каталог " outcome="catalog"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/categories">
+                    <h:link value=" Категории " outcome="categories"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/products">
+                    <h:link value=" Товары " outcome="products"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/cart">
+                    <h:link value=" Корзина " outcome="cart"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/order">
+                    <h:link value=" Оформить заказ " outcome="order"/></a></li>
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/login">Вход</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/register">Регистрация</a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/login">
+                    <h:link value=" Вход " outcome="login"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/register">
+                    <h:link value=" Регистрация " outcome="register"/></a></li>
             </ul>
         </div>
     </nav>
 
     <h1>Товар</h1>
-    <table border="1">
-        <tr>
-            <th>Номер</th>
-            <th>Товар</th>
-            <th>Описание</th>
-            <th>Цена</th>
-            <th></th>
-        </tr>
-            <tr>
-                <c:url value="/product/savecart" var="save_cartUrl">
-                    <c:param name="id" value="${product.id}"/>
-                    <c:param name="prod" value="${product}"/>
-                </c:url>
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>${product.description}</td>
-                <td>${product.price}</td>
-                <td><a href="${save_cartUrl}">Сохранить в конзину</a></td>
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+                <h:form id="productForm">
 
-            </tr>
+                    <div class="form-group">
+                        <h:outputLabel value="Product name"/>
+                        <h:inputText  styleClass="form-control" class="form-control" id="productname"
+                                      placeholder="Enter product name"
+                                      value="#{productController.product.name}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Description"/>
+                        <h:inputText styleClass="form-control" id="description" value="#{productController.product.description}"
+                                     placeholder="Enter description">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Price"/>
+                        <h:inputText styleClass="form-control" id="price" value="#{productController.product.price}"
+                                     placeholder="Enter price">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Category"/>
+<!--                        <h:inputText styleClass="form-control" id="category" value="#{productController.product.category}"-->
+<!--                                     placeholder="Enter category">-->
+<!--                        </h:inputText>-->
+<!--                        event="change"-->
+                        <!--                        id="category"-->
 
-    </table>
+                        <h:selectOneMenu id="category" value= "#{categoryController.allCategory}" converter="javax.faces.Integer">
+<!--                            <f:ajax render="productForm"/>-->
+                            <f:selectItems value="#{categoryController.allCategory}" var="category" itemLabel="#{category.categoryName}" itemValue="#{category.id}"/>
+                        </h:selectOneMenu>​
+
+                        <div class="form-group">
+                            <h:outputLabel value="Date"/>
+                            <h:inputText p:type="date" class="form-control" id="localDate" name="localDate"
+                                         value="#{productController.product.localDate}">
+                                <f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{productController.saveProduct}"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

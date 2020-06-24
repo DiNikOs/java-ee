@@ -1,6 +1,4 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -14,9 +12,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>Hello, world!</title>
+    <title>Catalog</title>
 </h:head>
 <h:body>
+    <f:event listener="${categoryController.preloadCategoryList}" type="preRenderView" />
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Brand</a>
@@ -48,7 +47,51 @@
             </ul>
         </div>
     </nav>
-    <h1>Оформить заказ</h1>
+
+    <h1>Категории</h1>
+
+    <div class="container">
+
+        <h:form id="categoriesForm">
+            <div class="row py-2">
+                <div class="col-12">
+                    <h:commandButton value="Add Category" styleClass="btn btn-primary" action="#{categoryController.createCategory}"/>
+                </div>
+
+                <div class="col-12">
+                    <h:dataTable value="#{categoryController.allCategory}" var="cat"
+                                 styleClass="table table-bordered my-2">
+
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{cat.id}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Name category</f:facet>
+                            #{cat.categoryName}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Discription</f:facet>
+                            #{cat.description}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Edit" styleClass="btn btn-success"
+                                             action="#{categoryController.editCategory(cat)}"/>
+                            <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             action="#{categoryController.deleteCategory(cat)}">
+                                <f:ajax event="click" render="categoriesForm"/>
+                            </h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

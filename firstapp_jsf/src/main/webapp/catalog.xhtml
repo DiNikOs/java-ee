@@ -17,7 +17,7 @@
     <title>Catalog</title>
 </h:head>
 <h:body>
-<!--    <%@ include file="/WEB-INF/views/menu.jspf" %>-->
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Brand</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -27,54 +27,65 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active"><a class="nav-link" href="/firstapp_jsp/main">Главная <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/catalog">Каталог</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/product">Товар</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/cart">Корзина</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/order">Оформить заказ</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/firstapp_jsp/index">
+                    <h:link value=" Главная " outcome="index"/> <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/catalog">
+                    <h:link value=" Каталог " outcome="catalog"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/categories">
+                    <h:link value=" Категории " outcome="categories"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/products">
+                    <h:link value=" Товары " outcome="products"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/cart">
+                    <h:link value=" Корзина " outcome="cart"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/order">
+                    <h:link value=" Оформить заказ " outcome="order"/></a></li>
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/login">Вход</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/register">Регистрация</a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/login">
+                    <h:link value=" Вход " outcome="login"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/register">
+                    <h:link value=" Регистрация " outcome="register"/></a></li>
             </ul>
         </div>
     </nav>
     <h1>Каталог</h1>
-    <table border="1">
-        <tr>
-            <th>Номер</th>
-            <th>Товар</th>
-            <th>Описание</th>
-            <th>Цена</th>
-            <th></th>
-        </tr>
-        <c:forEach items="${requestScope.products}" var="prod">
-            <tr>
-                <c:url value="/product/edit" var="editUrl">
-                    <c:param name="id" value="${prod.id}"/>
-                </c:url>
-                <c:url value="/product/see" var="seeUrl">
-                    <c:param name="id" value="${prod.id}"/>
-                </c:url>
-                <c:url value="/product/del" var="delUrl">
-                    <c:param name="id" value="${prod.id}"/>
-                </c:url>
-                <td>${prod.id}</td>
-                <td>${prod.name}</td>
-                <td>${prod.description}</td>
-                <td>${prod.price}</td>
-                <td><a href="${seeUrl}">See</a></td>
-                <td><a href="${editUrl}">Edit</a></td>
-                <td><a href="${delUrl}">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
+    <div class="container">
 
-    <c:url value="/product/add" var="productAddPostUrl"/>
-    <form action="${productAddPostUrl}" method="post">
-        <input type="text" class="form-control" id="id" name="id" value="${null}">
-        <button type="submit" id="addProduct" class="btn btn-primary">Submit</button>
-    </form>
+        <h:form id="categoriesForm">
+            <div class="row py-2">
+                <div class="col-12">
+                    <h:commandButton value="Add Catalog" styleClass="btn btn-primary" action="#{categoryController.createCategory}"/>
+                </div>
+
+                <div class="col-12">
+                    <h:dataTable value="#{categoryController.allCategory}" var="cat"
+                                 styleClass="table table-bordered my-2">
+
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{cat.id}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Name category</f:facet>
+                            #{cat.categoryName}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Edit" styleClass="btn btn-success"
+                                             action="#{categoryController.editCategory(cat)}"/>
+                            <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             action="#{categoryController.deleteCategory(cat)}">
+                                <f:ajax event="click" render="todosForm"/>
+                            </h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

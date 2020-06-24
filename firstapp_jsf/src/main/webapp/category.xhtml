@@ -1,6 +1,4 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -14,10 +12,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>Hello, world!</title>
+    <title>Catalog</title>
 </h:head>
 <h:body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Brand</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -48,7 +45,33 @@
             </ul>
         </div>
     </nav>
-    <h1>Оформить заказ</h1>
+
+    <h1>Категория</h1>
+
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+                <h:form id="categoryForm">
+
+                    <div class="form-group">
+                        <h:outputLabel value="Category name"/>
+                        <h:inputText  styleClass="form-control" id="categoryname"
+                                      value="#{categoryController.category.categoryName}"
+                                      placeholder="Enter Name category">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Description"/>
+                        <h:inputText styleClass="form-control" id="description"
+                                     value="#{categoryController.category.description}"
+                                     placeholder="Enter description">
+                        </h:inputText>
+                    </div>
+                    <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{categoryController.saveCategory}"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

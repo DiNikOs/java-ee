@@ -17,66 +17,39 @@
 
 <h:body>
 
-    <f:event listener="${toDoBean.preloadTodoList}" type="preRenderView" />
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">ToDo</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" />
+        <a class="navbar-brand" href="#">Brand</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">List</a>
-                </li>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active"><a class="nav-link" href="/firstapp_jsp/index">
+                    <h:link value=" Главная " outcome="index"/> <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/catalog">
+                    <h:link value=" Каталог " outcome="catalog"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/categories">
+                    <h:link value=" Категории " outcome="categories"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/products">
+                    <h:link value=" Товары " outcome="products"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/cart">
+                    <h:link value=" Корзина " outcome="cart"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/order">
+                    <h:link value=" Оформить заказ " outcome="order"/></a></li>
+            </ul>
+            <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/login">
+                    <h:link value=" Вход " outcome="login"/></a></li>
+                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/register">
+                    <h:link value=" Регистрация " outcome="register"/></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-
-        <h:form id="todosForm">
-            <div class="row py-2">
-                <div class="col-12">
-                    <h:commandButton value="Add Todo" styleClass="btn btn-primary" action="#{toDoBean.createTodo()}"/>
-                </div>
-
-                <div class="col-12">
-                    <h:dataTable value="#{toDoBean.allTodo}" var="todo"
-                                 styleClass="table table-bordered my-2">
-
-                        <h:column>
-                            <f:facet name="header">Id</f:facet>
-                            #{todo.id}
-                        </h:column>
-
-                        <h:column>
-                            <f:facet name="header">Description</f:facet>
-                            #{todo.description}
-                        </h:column>
-
-                        <h:column>
-                            <f:facet name="header">Target date</f:facet>
-                            #{todo.targetDate}
-                        </h:column>
-
-                        <h:column>
-                            <f:facet name="header">Actions</f:facet>
-                            <h:commandButton value="Edit" styleClass="btn btn-success"
-                                             action="#{toDoBean.editTodo(todo)}"/>
-                            <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                             action="#{toDoBean.deleteTodo(todo)}">
-                                <f:ajax event="click" render="todosForm"/>
-                            </h:commandButton>
-                        </h:column>
-
-                    </h:dataTable>
-                </div>
-            </div>
-        </h:form>
+    <h1> Welcome to marketplace</h1>
     </div>
 
     <!-- Optional JavaScript -->

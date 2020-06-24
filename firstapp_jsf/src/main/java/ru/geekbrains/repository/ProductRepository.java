@@ -13,25 +13,24 @@ import ru.geekbrains.entity.Category;
 import ru.geekbrains.entity.Product;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-public class ProductRepo {
+@ApplicationScoped
+@Named
+public class ProductRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductRepo.class);
-
-    @Inject
-    private Category category;
+    private static final Logger logger = LoggerFactory.getLogger(ProductRepository.class);
 
     @Inject
     private ServletContext servletContext;
@@ -39,43 +38,36 @@ public class ProductRepo {
     @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
 
-    public ProductRepo() {
+    public ProductRepository() {
     }
 
     @PostConstruct
     public void init() {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Long data = localDateTime.toEpochSecond(ZoneOffset.UTC);
-        if (this.findAll().isEmpty()) {
-            this.insert(new Product(-1L, "First", "Discription", bd(150), category, new Date(data)));
-            this.insert(new Product(-1L, "Two", "Discription", bd(150), category, new Date(data)));
-            this.insert(new Product(-1L, "Three", "Discription", bd(150), category, new Date(data)));
-        }
     }
 
     @Transactional
-    public void insert(Product product) {
+    public void insertProduct(Product product) {
         entityManager.persist(product);
     }
 
     @Transactional
-    public void update(Product product) {
+    public void updateProduct(Product product) {
         entityManager.merge(product);
     }
 
     @Transactional
-    public void delete(long id) {
+    public void deleteProduct(long id) {
         Product product = entityManager.find(Product.class, id);
         if (product != null) {
             entityManager.remove(product);
         }
     }
 
-    public Product findById(long id) {
+    public Product findProductById(long id) {
         return entityManager.find(Product.class, id);
     }
 
-    public List<Product> findAll() {
+    public List<Product> findAllProduct() {
         return entityManager.createQuery("from Product", Product.class).getResultList();
     }
 

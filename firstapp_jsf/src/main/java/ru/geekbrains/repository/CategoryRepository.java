@@ -12,50 +12,55 @@ import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import javax.transaction.*;
 import java.util.List;
 
-public class CategoryRepo {
+@ApplicationScoped
+@Named
+public class CategoryRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(CategoryRepo.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryRepository.class);
 
     @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
 
+    @Inject
+    private UserTransaction userTransaction;
+
     @PostConstruct
     public void init() {
-        if (this.findAll().isEmpty()) {
-            this.insert(new Category(-1L, "Category1"));
-            this.insert(new Category(-1L, "Category2"));
-            this.insert(new Category(-1L, "Category3"));
-        }
     }
 
     @Transactional
-    public void insert(Category category) {
+    public void insertCategory(Category category) {
         entityManager.persist(category);
     }
 
     @Transactional
-    public void update(Category category) {
+    public void updateCategory(Category category) {
         entityManager.merge(category);
     }
 
     @Transactional
-    public void delete(long id) {
+    public void deleteCategory(long id) {
         Category category = entityManager.find(Category.class, id);
         if (category != null) {
             entityManager.remove(category);
         }
     }
 
-    public Category findById(long id) {
+    @Transactional
+    public Category findCategoryById(long id) {
         return entityManager.find(Category.class, id);
     }
 
-    public List<Category> findAll() {
-        return entityManager.createQuery("from Category", Category.class).getResultList();
+    @Transactional
+    public List<Category> findAllCategories() {
+        return entityManager.createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
 }

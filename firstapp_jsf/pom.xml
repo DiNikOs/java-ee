@@ -95,28 +95,20 @@
             <version>5.4.13.Final</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>6.0.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
+            <version>8.0.20</version>
             <scope>runtime</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.jboss</groupId>-->
-<!--            <artifactId>jboss-transaction-spi</artifactId>-->
-<!--            <version>7.5.0.Final</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>jboss</groupId>-->
-<!--            <artifactId>jbossjta</artifactId>-->
-<!--            <version>4.2.2.GA</version>-->
-<!--        </dependency>-->
 
 <!--        <dependency>-->
 <!--            <groupId>com.h2database</groupId>-->
@@ -128,32 +120,28 @@
 
     <build>
         <finalName>firstapp_jsf</finalName>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
-                <plugin>
-                    <groupId>org.wildfly.plugins</groupId>
-                    <artifactId>wildfly-maven-plugin</artifactId>
-                    <version>2.0.2.Final</version>
-<!--                    <configuration>-->
-<!--                        <jbossHome>C:\wildfly-8.2.0.Final</jbossHome>-->
-<!--                        <hostname>localhost</hostname>-->
-<!--                        <port>8080</port>-->
-<!--                        <serverConfig>standalone.xml</serverConfig>-->
-<!--                    </configuration>-->
-                </plugin>
-
-
 <!--                <plugin>-->
-<!--                    <groupId>org.flywaydb</groupId>-->
-<!--                    <artifactId>flyway-maven-plugin</artifactId>-->
-<!--                    <version>${flyway.version}</version>-->
-<!--                    <configuration>-->
-<!--                        <configFiles>src/main/resources/flyway.conf</configFiles>-->
-<!--                    </configuration>-->
+<!--                    <groupId>org.wildfly.plugins</groupId>-->
+<!--                    <artifactId>wildfly-maven-plugin</artifactId>-->
+<!--                    <version>2.0.2.Final</version>-->
+<!--                  <configuration>&ndash;&gt;-->
+<!--                      <jbossHome>C:\wildfly-8.2.0.Final</jbossHome>&ndash;&gt;-->
+<!--                      <hostname>localhost</hostname>&ndash;&gt;-->
+<!--                      <port>8080</port>&ndash;&gt;-->
+<!--                      <serverConfig>standalone.xml</serverConfig>&ndash;&gt;-->
+<!--                  </configuration>&ndash;&gt;-->
 <!--                </plugin>-->
-
-
+                <plugin>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-maven-plugin</artifactId>
+                    <version>6.0.1</version>
+                    <configuration>
+                        <url>jdbc:mysql://localhost:3306/db?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
+                        <user>root</user>
+                        <password>root</password>
+                    </configuration>
+            </plugin>
             </plugins>
-        </pluginManagement>
     </build>
 </project>

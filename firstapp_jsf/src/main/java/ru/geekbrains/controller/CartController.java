@@ -3,66 +3,60 @@ package ru.geekbrains.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.geekbrains.entity.ToDo;
-import ru.geekbrains.entity.ToDoRepository;
+import ru.geekbrains.entity.OrderItem;
+import ru.geekbrains.entity.Product;
+import ru.geekbrains.repository.ProductRepository;
+import ru.geekbrains.utils.Cart;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collection;
 
-@ApplicationScoped
+@SessionScoped
 @Named
-public class CartController {
+public class CartController implements Serializable {
 
-    private static final Logger logger = LoggerFactory.getLogger(ToDoBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 
     @Inject
-    private ToDoRepository toDoRepository;
+    private ProductRepository productRepository;
 
-    private ToDo toDo;
+    private Cart cart;
 
-    private List<ToDo> toDoList;
+    private Collection<OrderItem> cartList;
 
     public void preloadTodoList(ComponentSystemEvent componentSystemEvent) {
-        this.toDoList = toDoRepository.findAll();
+        this.cartList = cart.getItems().values();
     }
 
-    public ToDo getToDo() {
-        return toDo;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setToDo(ToDo toDo) {
-        this.toDo = toDo;
+    public void setToDo(Cart cart) {
+        this.cart = cart;
     }
 
-    public List<ToDo> getAllTodo() {
-        return toDoList;
+    public Collection<OrderItem> getAllTodo() {
+        return cartList;
     }
 
-    public String createTodo() {
-        this.toDo = new ToDo();
-        return "/todo.xhtml?faces-redirect=true";
+    public String addProductToCart(Product product) {
+        cart.addProduct(product);
+        return "/cart.xhtml?faces-redirect=true";
     }
 
-    public String saveTodo() {
-        if (toDo.getId() == null) {
-            toDoRepository.insert(toDo);
-        } else {
-            toDoRepository.update(toDo);
-        }
+    public String removeCart(Product product) {
+        cart.removeItem(product);
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public void deleteTodo(ToDo toDo) {
-        logger.info("Deleting ToDo.");
-        toDoRepository.delete(toDo.getId());
-    }
-
-    public String editTodo(ToDo toDo) {
-        this.toDo = toDo;
-        return "/todo.xhtml?faces-redirect=true";
+    public void deleteCart(Cart cart) {
+        logger.info("Deleting Cart.");
+        cart.clear();
     }
 }

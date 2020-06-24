@@ -2,65 +2,71 @@ package ru.geekbrains.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.geekbrains.entity.ToDo;
-import ru.geekbrains.entity.ToDoRepository;
+import ru.geekbrains.entity.Product;
+import ru.geekbrains.repository.ProductRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
-@ApplicationScoped
+@SessionScoped
 @Named
-public class ProductController {
+public class ProductController implements Serializable {
 
-    private static final Logger logger = LoggerFactory.getLogger(ToDoBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Inject
-    private ToDoRepository toDoRepository;
+    private ProductRepository productRepository;
 
-    private ToDo toDo;
+    private Product product;
 
-    private List<ToDo> toDoList;
+    private List<Product> productList;
 
-    public void preloadTodoList(ComponentSystemEvent componentSystemEvent) {
-        this.toDoList = toDoRepository.findAll();
+    public void preloadProductList(ComponentSystemEvent componentSystemEvent) {
+        this.productList = productRepository.findAllProduct();
     }
 
-    public ToDo getToDo() {
-        return toDo;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setToDo(ToDo toDo) {
-        this.toDo = toDo;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public List<ToDo> getAllTodo() {
-        return toDoList;
+    public List<Product> getAllProduct() {
+        return productRepository.findAllProduct();
     }
 
-    public String createTodo() {
-        this.toDo = new ToDo();
-        return "/todo.xhtml?faces-redirect=true";
+    public String doActionProduct() {
+        return "products.xhtml";
     }
 
-    public String saveTodo() {
-        if (toDo.getId() == null) {
-            toDoRepository.insert(toDo);
+    public String createProduct() {
+        this.product = new Product();
+        return "/product.xhtml?faces-redirect=true";
+    }
+
+    public String saveProduct() {
+        if (product.getId() == null) {
+            productRepository.insertProduct(product);
         } else {
-            toDoRepository.update(toDo);
+            productRepository.updateProduct(product);
         }
-        return "/index.xhtml?faces-redirect=true";
+        return "products.xhtml";
     }
 
-    public void deleteTodo(ToDo toDo) {
-        logger.info("Deleting ToDo.");
-        toDoRepository.delete(toDo.getId());
+    public void deleteProduct(Product product) {
+        logger.info("Deleting Product.");
+        productRepository.deleteProduct(product.getId());
     }
 
-    public String editTodo(ToDo toDo) {
-        this.toDo = toDo;
-        return "/todo.xhtml?faces-redirect=true";
+    public String editProduct(Product product) {
+        this.product = product;
+        return "/product.xhtml?faces-redirect=true";
     }
 }

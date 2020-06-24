@@ -3,66 +3,66 @@ package ru.geekbrains.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.geekbrains.entity.ToDo;
-import ru.geekbrains.entity.ToDoRepository;
+import ru.geekbrains.entity.Order;
+import ru.geekbrains.repository.OrderRepository;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.security.Principal;
+import java.io.Serializable;
 import java.util.List;
 
-@ApplicationScoped
+@SessionScoped
 @Named
-public class OrderController {
+public class OrderController implements Serializable {
 
-    private static final Logger logger = LoggerFactory.getLogger(ToDoBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Inject
-    private ToDoRepository toDoRepository;
+    private OrderRepository orderRepository;
 
-    private ToDo toDo;
+    private Order order;
 
-    private List<ToDo> toDoList;
+    private List<Order> orderList;
 
-    public void preloadTodoList(ComponentSystemEvent componentSystemEvent) {
-        this.toDoList = toDoRepository.findAll();
+    public void preloadOrderList(ComponentSystemEvent componentSystemEvent) {
+        this.orderList = orderRepository.findAllOrder();
     }
 
-    public ToDo getToDo() {
-        return toDo;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setToDo(ToDo toDo) {
-        this.toDo = toDo;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public List<ToDo> getAllTodo() {
-        return toDoList;
+    public List<Order> getAllOrder() {
+        return orderList;
     }
 
-    public String createTodo() {
-        this.toDo = new ToDo();
-        return "/todo.xhtml?faces-redirect=true";
+    public String createOrder() {
+        this.order = new Order();
+        return "/order.xhtml?faces-redirect=true";
     }
 
-    public String saveTodo() {
-        if (toDo.getId() == null) {
-            toDoRepository.insert(toDo);
+    public String saveOrder() {
+        if (order.getId() == null) {
+            orderRepository.insertOrder(order);
         } else {
-            toDoRepository.update(toDo);
+            orderRepository.updateOrder(order);
         }
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public void deleteTodo(ToDo toDo) {
-        logger.info("Deleting ToDo.");
-        toDoRepository.delete(toDo.getId());
+    public void deleteOrder(Order order) {
+        logger.info("Deleting Order.");
+        orderRepository.deleteOrder(order.getId());
     }
 
-    public String editTodo(ToDo toDo) {
-        this.toDo = toDo;
-        return "/todo.xhtml?faces-redirect=true";
+    public String editOrder(Order order) {
+        this.order = order;
+        return "/order.xhtml?faces-redirect=true";
     }
 }

@@ -48,7 +48,66 @@
             </ul>
         </div>
     </nav>
-    <h1>Оформить заказ</h1>
+
+    <h1>Товары</h1>
+    <div class="container">
+
+        <h:form id="productsForm">
+            <div class="row py-2">
+                <div class="col-12">
+                    <h:commandButton value="Add Product" styleClass="btn btn-primary" action="#{productController.createProduct}"/>
+                </div>
+
+                <div class="col-12">
+                    <h:dataTable value="#{productController.allProduct}" var="prod"
+                                 styleClass="table table-bordered my-2">
+
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{prod.id}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Name product</f:facet>
+                            #{prod.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Discription</f:facet>
+                            #{prod.description}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                            #{prod.price}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Category</f:facet>
+                            #{prod.category}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Date</f:facet>
+                            #{prod.localDate}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Edit" styleClass="btn btn-success"
+                                             action="#{categoryController.editCategory(cat)}"/>
+                            <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             action="#{categoryController.deleteCategory(cat)}">
+                                <f:ajax event="click" render="todosForm"/>
+                            </h:commandButton>
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -60,7 +119,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-
 </h:body>
 
 </html>

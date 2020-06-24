@@ -20,15 +20,21 @@ public class OrderItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "quantity")
-    private int quantity;
-
     @Column(name = "price")
     private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "item_price")
+    private BigDecimal itemPrice;
+
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
 
     public OrderItem(Product product) {
         this.product = product;
