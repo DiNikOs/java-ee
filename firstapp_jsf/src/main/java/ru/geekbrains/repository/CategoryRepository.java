@@ -10,18 +10,18 @@ package ru.geekbrains.repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
+import ru.geekbrains.service.repr.CategoryRepr;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.*;
 import java.util.List;
 
-@ApplicationScoped
-@Named
+@Stateless
 public class CategoryRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryRepository.class);
@@ -29,24 +29,21 @@ public class CategoryRepository {
     @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
 
-    @Inject
-    private UserTransaction userTransaction;
-
     @PostConstruct
     public void init() {
     }
 
-    @Transactional
+    @TransactionAttribute
     public void insertCategory(Category category) {
         entityManager.persist(category);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void updateCategory(Category category) {
         entityManager.merge(category);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void deleteCategory(long id) {
         Category category = entityManager.find(Category.class, id);
         if (category != null) {
@@ -54,13 +51,12 @@ public class CategoryRepository {
         }
     }
 
-    @Transactional
     public Category findCategoryById(long id) {
         return entityManager.find(Category.class, id);
     }
 
-    @Transactional
     public List<Category> findAllCategories() {
-        return entityManager.createQuery("SELECT c FROM Category c", Category.class).getResultList();
+        return entityManager.createQuery("SELECT cat FROM Category cat", Category.class).getResultList();
     }
+
 }

@@ -17,6 +17,7 @@
     <title>Hello, world!</title>
 </h:head>
 <h:body>
+    <f:event listener="#{productController.preloadProductList}" type="preRenderView"/>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Brand</a>
@@ -55,7 +56,8 @@
         <h:form id="productsForm">
             <div class="row py-2">
                 <div class="col-12">
-                    <h:commandButton value="Add Product" styleClass="btn btn-primary" action="#{productController.createProduct}"/>
+                    <h:commandButton value="Add Product" styleClass="btn btn-primary"
+                                     action="#{productController.createProduct}"/>
                 </div>
 
                 <div class="col-12">
@@ -84,7 +86,7 @@
 
                         <h:column>
                             <f:facet name="header">Category</f:facet>
-                            #{prod.category}
+                            #{prod.categoryName}
                         </h:column>
 
                         <h:column>
@@ -95,10 +97,14 @@
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
                             <h:commandButton value="Edit" styleClass="btn btn-success"
-                                             action="#{categoryController.editCategory(cat)}"/>
+                                             action="#{productController.editProductRepr(prod)}"/>
                             <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                             action="#{categoryController.deleteCategory(cat)}">
-                                <f:ajax event="click" render="todosForm"/>
+                                             action="#{productController.deleteProduct(prod)}">
+                                <f:ajax event="click" render="productsForm"/>
+                            </h:commandButton>
+                            <h:commandButton value="Add to cart" styleClass="btn btn-success"
+                                             action="#{cartController.addProductToCart(prod)}">
+                                <f:ajax event="click" render="productsForm"/>
                             </h:commandButton>
                         </h:column>
 

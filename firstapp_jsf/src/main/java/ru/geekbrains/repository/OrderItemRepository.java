@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.OrderItem;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -19,8 +21,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@ApplicationScoped
-@Named
+@Stateless
 public class OrderItemRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderItemRepository.class);
@@ -32,17 +33,17 @@ public class OrderItemRepository {
     public void init() {
     }
 
-    @Transactional
+    @TransactionAttribute
     public void insert(OrderItem orderItem) {
         entityManager.persist(orderItem);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void update(OrderItem orderItem) {
         entityManager.merge(orderItem);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void delete(long id) {
         OrderItem orderItem = entityManager.find(OrderItem.class, id);
         if (orderItem != null) {

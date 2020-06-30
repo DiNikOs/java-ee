@@ -1,62 +1,43 @@
 /**
  * @author Ostrovskiy Dmitriy
- * @created 05.06.2020
- * Product
+ * @created 30.06.2020
+ * ProductRepr
  * @version v1.0
  */
 
-package ru.geekbrains.entity;
+package ru.geekbrains.service.repr;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
-@Entity
-@Table(name = "products")
-public class Product implements Serializable {
+public class ProductRepr implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name ="prod_name", length = 4096,  nullable = false)
     private String name;
 
-    @Column()
     private String description;
 
-    @Column()
     private BigDecimal price;
 
-//    @JoinColumn()
-//    optional = false
-    @ManyToOne()
-    private Category category;
+    private Long categoryId;
 
-    @Column(nullable = false)
+    private String categoryName;
+
     private LocalDate localDate;
 
-    public Product(){
+    public ProductRepr() {
 
     }
 
-    public Product(Long id, String name, String description, BigDecimal price, Category category, LocalDate localDate) {
+    public ProductRepr(Long id, String name, String description, BigDecimal price, Long categoryId, String categoryName, LocalDate localDate) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.category = category;
-        this.localDate = localDate;
-    }
-
-    public Product(Long id, String name, String description, BigDecimal price, Long categoryId, LocalDate localDate) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.category.setId(categoryId);
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.localDate = localDate;
     }
 
@@ -92,12 +73,20 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Category getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public LocalDate getLocalDate() {

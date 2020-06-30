@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
 import ru.geekbrains.repository.CategoryRepository;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
@@ -24,12 +25,12 @@ import java.util.List;
 public class CategoryController implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
-    @Inject
+    @EJB
     private CategoryRepository categoryRepository;
 
-    private Category category;
-
     private List<Category> categoryList;
+
+    private Category category;
 
     public void preloadCategoryList(ComponentSystemEvent componentSystemEvent) {
         this.categoryList = categoryRepository.findAllCategories();
@@ -44,7 +45,8 @@ public class CategoryController implements Serializable {
     }
 
     public List<Category> getAllCategory() {
-        return categoryRepository.findAllCategories();
+//        return categoryRepository.findAllCategories();
+        return categoryList;
     }
 
     public String doActionCategory() {

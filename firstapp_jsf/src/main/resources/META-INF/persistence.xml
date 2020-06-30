@@ -8,11 +8,6 @@
     <persistence-unit name="ds" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/jboss/datasources/MySQLDS</jta-data-source>
-        <class>ru.geekbrains.entity.Category</class>
-        <class>ru.geekbrains.entity.Product</class>
-        <class>ru.geekbrains.entity.Order</class>
-        <class>ru.geekbrains.entity.User</class>
-        <class>ru.geekbrains.entity.OrderItem</class>
         <properties>
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
@@ -21,7 +16,7 @@
 <!--                      value="jdbc:mysql://localhost:3306/db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"/>-->
 <!--            <property name="hibernate.connection.username" value="root"/>-->
 <!--            <property name="hibernate.connection.password" value="root"/>-->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
             <property name="hibernate.format_sql" value="true"/>

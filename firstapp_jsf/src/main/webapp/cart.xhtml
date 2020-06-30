@@ -49,6 +49,49 @@
         </div>
     </nav>
     <h1>Корзина</h1>
+
+    <div class="container">
+        <div class="row py-2">
+            <h:form id="CartForm">
+                <div class="col-12">
+                    <h:dataTable value="#{cartController.allToCart}" var="prod"
+                                 styleClass="table table-bordered my-2">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{prod.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{prod.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Description</f:facet>
+                            #{prod.description}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                            #{prod.price}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Category</f:facet>
+                            #{prod.categoryName}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Date</f:facet>
+                            #{prod.localDate}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             action="#{cartController.removeCart(prod)}">
+                                <f:ajax event="click" render="CartForm"/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

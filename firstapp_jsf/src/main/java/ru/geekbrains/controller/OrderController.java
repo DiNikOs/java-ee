@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Order;
 import ru.geekbrains.repository.OrderRepository;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class OrderController implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
-    @Inject
+    @EJB
     private OrderRepository orderRepository;
 
     private Order order;

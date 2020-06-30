@@ -23,13 +23,13 @@ public class Category implements Serializable {
     @Column(name = "description", length = 4096)
     private String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<Product> products;
 
     public Category() {
     }
 
-    public Category(long id, String categoryName, String categoryDescription) {
+    public Category(Long id, String categoryName, String categoryDescription) {
         this.id = id;
         this.categoryName = categoryName;
         this.description = categoryDescription;

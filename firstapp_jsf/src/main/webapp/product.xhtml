@@ -64,42 +64,42 @@
                         <h:outputLabel value="Product name"/>
                         <h:inputText  styleClass="form-control" class="form-control" id="productname"
                                       placeholder="Enter product name"
-                                      value="#{productController.product.name}"/>
+                                      value="#{productController.productRepr.name}"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Description"/>
-                        <h:inputText styleClass="form-control" id="description" value="#{productController.product.description}"
+                        <h:inputText styleClass="form-control" id="description"
+                                     value="#{productController.productRepr.description}"
                                      placeholder="Enter description">
                         </h:inputText>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Price"/>
-                        <h:inputText styleClass="form-control" id="price" value="#{productController.product.price}"
+                        <h:inputText styleClass="form-control" id="price"
+                                     value="#{productController.productRepr.price}"
                                      placeholder="Enter price">
                         </h:inputText>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Category"/>
-<!--                        <h:inputText styleClass="form-control" id="category" value="#{productController.product.category}"-->
-<!--                                     placeholder="Enter category">-->
-<!--                        </h:inputText>-->
-<!--                        event="change"-->
-                        <!--                        id="category"-->
-
-                        <h:selectOneMenu id="category" value= "#{categoryController.allCategory}" converter="javax.faces.Integer">
+                        <h:selectOneListbox size="1" id="category"
+                                         value= "#{productController.productRepr.categoryId}">
 <!--                            <f:ajax render="productForm"/>-->
-                            <f:selectItems value="#{categoryController.allCategory}" var="category" itemLabel="#{category.categoryName}" itemValue="#{category.id}"/>
-                        </h:selectOneMenu>​
-
-                        <div class="form-group">
-                            <h:outputLabel value="Date"/>
-                            <h:inputText p:type="date" class="form-control" id="localDate" name="localDate"
-                                         value="#{productController.product.localDate}">
-                                <f:convertDateTime type="date" pattern="yyyy-MM-dd"/>
-                            </h:inputText>
-                        </div>
+                            <f:selectItems value="#{productController.allCategories}"
+                                           var="cat"
+                                           itemValue="#{cat.id}"
+                                           itemLabel="#{cat.categoryName}"
+                                           itemLabelEscaped="true"/>
+                        </h:selectOneListbox>​
                     </div>
-                    <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{productController.saveProduct}"/>
+                    <div class="form-group">
+                        <h:outputLabel value="Date"/>
+                        <h:inputText p:type="date" class="form-control" id="localDate" name="localDate"
+                                     value="#{productController.productRepr.localDate}">
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                        </h:inputText>
+                    </div>
+                    <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{productController.saveProductRepr}"/>
                 </h:form>
             </div>
         </div>

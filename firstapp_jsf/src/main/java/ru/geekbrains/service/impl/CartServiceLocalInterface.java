@@ -1,0 +1,16 @@
+/**
+ * @author Ostrovskiy Dmitriy
+ * @created 30.06.2020
+ * CartServiceLocalInterface
+ * @version v1.0
+ */
+
+package ru.geekbrains.service.impl;
+
+import javax.ejb.Local;
+
+@Local
+public interface CartServiceLocalInterface {
+
+
+}

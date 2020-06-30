@@ -11,8 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
 import ru.geekbrains.entity.Product;
+import ru.geekbrains.service.repr.CategoryRepr;
+import ru.geekbrains.service.repr.ProductRepr;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,14 +30,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-@ApplicationScoped
-@Named
+@Stateless
 public class ProductRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductRepository.class);
-
-    @Inject
-    private ServletContext servletContext;
 
     @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
@@ -45,17 +45,17 @@ public class ProductRepository {
     public void init() {
     }
 
-    @Transactional
+    @TransactionAttribute
     public void insertProduct(Product product) {
         entityManager.persist(product);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void updateProduct(Product product) {
         entityManager.merge(product);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void deleteProduct(long id) {
         Product product = entityManager.find(Product.class, id);
         if (product != null) {
@@ -68,11 +68,26 @@ public class ProductRepository {
     }
 
     public List<Product> findAllProduct() {
-        return entityManager.createQuery("from Product", Product.class).getResultList();
+        return entityManager.createQuery("SELECT prod FROM Product prod", Product.class).getResultList();
     }
 
     public BigDecimal bd (int big){
         BigDecimal bd = new BigDecimal(big);
         return bd;
+    }
+
+    public ProductRepr findProductReprById(long id) {
+        return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.ProductRepr(" +
+                "p.id, p.name, p.description, p.price, p.category.id, p.category.categoryName, p.localDate) " +
+                "FROM ProductRepr p WHERE p.id = :id", ProductRepr.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    public List<ProductRepr> findAllProductRepr() {
+        return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.ProductRepr(" +
+                "p.id, p.name, p.description, p.price, p.category.id, p.category.categoryName, p.localDate) " +
+                "FROM Product p", ProductRepr.class)
+                .getResultList();
     }
 }
