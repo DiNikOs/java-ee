@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
 import ru.geekbrains.service.repr.CategoryRepr;
+import ru.geekbrains.service.repr.ProductRepr;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -28,6 +29,10 @@ public class CategoryRepository {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager entityManager;
+
+    public CategoryRepository() {
+
+    }
 
     @PostConstruct
     public void init() {
@@ -57,6 +62,21 @@ public class CategoryRepository {
 
     public List<Category> findAllCategories() {
         return entityManager.createQuery("SELECT cat FROM Category cat", Category.class).getResultList();
+    }
+
+    public CategoryRepr findCaregoryReprById(long id) {
+        return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.CategoryRepr(" +
+                "c.id, c.categoryName , c.description) " +
+                "FROM CategorytRepr c WHERE c.id = :id", CategoryRepr.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    public List<CategoryRepr> findAllCategoryRepr() {
+        return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.CategoryRepr(" +
+                "c.id, c.categoryName , c.description) " +
+                "FROM Category c", CategoryRepr.class)
+                .getResultList();
     }
 
 }

@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/firstapp/firstapp.iml" filepath="$PROJECT_DIR$/firstapp/firstapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/firstapp_jsf/firstapp_jsf.iml" filepath="$PROJECT_DIR$/firstapp_jsf/firstapp_jsf.iml" />
       <module fileurl="file://$PROJECT_DIR$/firstapp_jsp/firstapp_jsp.iml" filepath="$PROJECT_DIR$/firstapp_jsp/firstapp_jsp.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-ee.iml" filepath="$PROJECT_DIR$/java-ee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ws-client/ws-client.iml" filepath="$PROJECT_DIR$/ws-client/ws-client.iml" />
     </modules>
   </component>
 </project>

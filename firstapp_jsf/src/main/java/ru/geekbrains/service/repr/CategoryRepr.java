@@ -20,6 +20,10 @@ public class CategoryRepr implements Serializable {
 
     private List<Long> productsId;
 
+    public CategoryRepr(){
+
+    }
+
     public CategoryRepr(Long id, String categoryName, String description, List<Long> productsId) {
         this.id = id;
         this.categoryName = categoryName;

@@ -11,24 +11,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
 import ru.geekbrains.repository.CategoryRepository;
+import ru.geekbrains.service.impl.rest.CategoryServiceRsInterface;
+import ru.geekbrains.service.impl.ws.CategoryServiceWsInterface;
 import ru.geekbrains.service.repr.CategoryRepr;
-import ru.geekbrains.service.impl.CategoryServiceLocalInterface;
-import ru.geekbrains.service.impl.CategoryServiceRemoteInterface;
+import ru.geekbrains.service.impl.local.CategoryServiceLocalInterface;
+import ru.geekbrains.service.impl.remote.CategoryServiceRemoteInterface;
 
+import javax.ejb.AsyncResult;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.jws.WebService;
 import java.util.List;
 import java.util.concurrent.Future;
 
 @Stateless
-public class CategoryService  implements CategoryServiceLocalInterface {
+@WebService(endpointInterface = "ru.geekbrains.service.impl.ws.CategoryServiceWsInterface", serviceName = "CategoryService")
+public class CategoryService  implements CategoryServiceLocalInterface, CategoryServiceRemoteInterface, CategoryServiceWsInterface, CategoryServiceRsInterface {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryService.class);
 
     @EJB
     private CategoryRepository catRepository;
-
 
     @Override
     public void insertCategory(CategoryRepr categoryRepr) {
@@ -48,13 +51,33 @@ public class CategoryService  implements CategoryServiceLocalInterface {
     }
 
     @Override
-    public CategoryRepr findById(long id) {
-        return null;
+    public CategoryRepr findCategoryById(long id) {
+        return catRepository.findCaregoryReprById(id);
     }
 
     @Override
-    public List<CategoryRepr> findAll() {
-        return null;
+    public List<CategoryRepr> findAllCategories() {
+        return catRepository.findAllCategoryRepr();
+    }
+
+    @Override
+    public Future<CategoryRepr> findCategoryByIdAsync(long id) {
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new AsyncResult<>(catRepository.findCaregoryReprById(id));
+    }
+
+    @Override
+    public List<CategoryRepr> findAllCategoryWs() {
+        return catRepository.findAllCategoryRepr();
+    }
+
+    @Override
+    public CategoryRepr findCategoryByIdWs(long id) {
+        return catRepository.findCaregoryReprById(id);
     }
 
 }

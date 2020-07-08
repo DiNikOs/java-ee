@@ -5,7 +5,7 @@
  * @version v1.0
  */
 
-package ru.geekbrains.service.impl;
+package ru.geekbrains.service.impl.remote;
 
 import ru.geekbrains.service.repr.CategoryRepr;
 
@@ -17,8 +17,8 @@ import java.util.concurrent.Future;
 @Remote
 public interface CategoryServiceRemoteInterface {
 
-    List<CategoryRepr> findAll();
+    List<CategoryRepr> findAllCategories();
 
     @Asynchronous
-    Future<CategoryRepr> findByIdAsync(long id);
+    Future<CategoryRepr> findCategoryByIdAsync(long id);
 }

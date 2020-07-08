@@ -25,9 +25,9 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -76,10 +76,25 @@ public class ProductRepository {
         return bd;
     }
 
+    public List<ProductRepr> findAllProductReprByCateoryId(long id) {
+        return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.ProductRepr(" +
+                "p.id, p.name, p.description, p.price, p.category.id, p.category.categoryName, p.localDate) " +
+                "FROM Product p WHERE p.category.id = : id", ProductRepr.class).setParameter("id", id)
+                .getResultList();
+    }
+
+    public ProductRepr findProductReprByName(String name) {
+        return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.ProductRepr(" +
+                "p.id, p.name, p.description, p.price, p.category.id, p.category.categoryName, p.localDate) " +
+                "FROM Product p WHERE p.name = :name", ProductRepr.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
     public ProductRepr findProductReprById(long id) {
         return entityManager.createQuery("SELECT new ru.geekbrains.service.repr.ProductRepr(" +
                 "p.id, p.name, p.description, p.price, p.category.id, p.category.categoryName, p.localDate) " +
-                "FROM ProductRepr p WHERE p.id = :id", ProductRepr.class)
+                "FROM Product p WHERE p.id = :id", ProductRepr.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }

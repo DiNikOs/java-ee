@@ -5,7 +5,7 @@
  * @version v1.0
  */
 
-package ru.geekbrains.service.impl;
+package ru.geekbrains.service.impl.remote;
 
 import javax.ejb.Remote;
 

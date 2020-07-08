@@ -3,10 +3,8 @@ package ru.geekbrains.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.geekbrains.entity.Category;
-import ru.geekbrains.entity.Product;
 import ru.geekbrains.repository.CategoryRepository;
-import ru.geekbrains.service.ProductService;
-import ru.geekbrains.service.impl.ProductServiceLocalInterface;
+import ru.geekbrains.service.impl.local.ProductServiceLocalInterface;
 import ru.geekbrains.service.repr.ProductRepr;
 
 import javax.ejb.EJB;
@@ -33,7 +31,7 @@ public class ProductController implements Serializable {
     private ProductRepr prodRepr;
 
     public void preloadProductList(ComponentSystemEvent componentSystemEvent) {
-        this.prodList = prodService.findAll();
+        this.prodList = prodService.findAllProduct();
     }
 
     public ProductRepr getProductRepr() {

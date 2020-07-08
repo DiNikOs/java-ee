@@ -7,7 +7,7 @@
 
 package ru.geekbrains.service;
 
-import ru.geekbrains.service.impl.OrderServiceLocalInterface;
+import ru.geekbrains.service.impl.local.OrderServiceLocalInterface;
 
 import javax.ejb.Stateless;
 

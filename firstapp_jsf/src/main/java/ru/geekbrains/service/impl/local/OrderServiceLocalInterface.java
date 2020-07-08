@@ -5,7 +5,7 @@
  * @version v1.0
  */
 
-package ru.geekbrains.service.impl;
+package ru.geekbrains.service.impl.local;
 
 import javax.ejb.Local;
 

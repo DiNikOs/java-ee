@@ -1,18 +1,18 @@
 /**
  * @author Ostrovskiy Dmitriy
- * @created 30.06.2020
- * ProductRepr
+ * @created 04.07.2020
+ * ProductReprWs
  * @version v1.0
  */
 
 package ru.geekbrains.service.repr;
 
-import java.io.Serializable;
+import ru.geekbrains.entity.Product;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
-public class ProductRepr implements Serializable {
+public class ProductReprWs {
 
     private Long id;
 
@@ -26,20 +26,18 @@ public class ProductRepr implements Serializable {
 
     private String categoryName;
 
-    private Date localDate;
 
-    public ProductRepr() {
+    public ProductReprWs() {
 
     }
 
-    public ProductRepr(Long id, String name, String description, BigDecimal price, Long categoryId, String categoryName, Date localDate) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-        this.localDate = localDate;
+    public ProductReprWs(Product productRepr) {
+        this.id = productRepr.getId();
+        this.name = productRepr.getName();
+        this.description = productRepr.getDescription();
+        this.price = productRepr.getPrice();
+        this.categoryId = productRepr.getCategory().getId();
+        this.categoryName = productRepr.getCategory().getCategoryName();
     }
 
     public Long getId() {
@@ -90,11 +88,11 @@ public class ProductRepr implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public Date getLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(Date localDate) {
-        this.localDate = localDate;
-    }
+//    public LocalDate getLocalDate() {
+//        return localDate;
+//    }
+//
+//    public void setLocalDate(LocalDate localDate) {
+//        this.localDate = localDate;
+//    }
 }

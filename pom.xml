@@ -16,6 +16,8 @@
   </properties>
 
   <modules>
+    <module>client</module>
+    <module>ws-client</module>
     <module>firstapp</module>
     <module>firstapp_jsp</module>
     <module>firstapp_jsf</module>

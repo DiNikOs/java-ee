@@ -5,8 +5,9 @@
  * @version v1.0
  */
 
-package ru.geekbrains.service.impl;
+package ru.geekbrains.service.impl.local;
 
+import ru.geekbrains.entity.Category;
 import ru.geekbrains.service.repr.CategoryRepr;
 
 import javax.ejb.Local;
@@ -21,7 +22,7 @@ public interface CategoryServiceLocalInterface {
 
     void deleteCategory(long id);
 
-    CategoryRepr findById(long id);
+    CategoryRepr findCategoryById(long id);
 
-    List<CategoryRepr> findAll();
+    List<CategoryRepr> findAllCategories();
 }

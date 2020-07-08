@@ -5,7 +5,7 @@
  * @version v1.0
  */
 
-package ru.geekbrains.service.impl;
+package ru.geekbrains.service.impl.local;
 
 import ru.geekbrains.service.repr.ProductRepr;
 
@@ -21,7 +21,11 @@ public interface ProductServiceLocalInterface {
 
     void deleteProduct(long id);
 
-    ProductRepr findById(long id);
+    ProductRepr findProductById(long id);
 
-    List<ProductRepr> findAll();
+    ProductRepr findProductReprByName(String name);
+
+    List<ProductRepr> findAllProduct();
+
+    List<ProductRepr> findAllProductByCategoryId(long id);
 }

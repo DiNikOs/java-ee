@@ -36,13 +36,13 @@ public class Product implements Serializable {
     private Category category;
 
     @Column(nullable = false)
-    private LocalDate localDate;
+    private Date localDate;
 
     public Product(){
 
     }
 
-    public Product(Long id, String name, String description, BigDecimal price, Category category, LocalDate localDate) {
+    public Product(Long id, String name, String description, BigDecimal price, Category category, Date localDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -51,7 +51,7 @@ public class Product implements Serializable {
         this.localDate = localDate;
     }
 
-    public Product(Long id, String name, String description, BigDecimal price, Long categoryId, LocalDate localDate) {
+    public Product(Long id, String name, String description, BigDecimal price, Long categoryId, Date localDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -100,11 +100,11 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public LocalDate getLocalDate() {
+    public Date getLocalDate() {
         return localDate;
     }
 
-    public void setLocalDate(LocalDate localDate) {
+    public void setLocalDate(Date localDate) {
         this.localDate = localDate;
     }
 }
