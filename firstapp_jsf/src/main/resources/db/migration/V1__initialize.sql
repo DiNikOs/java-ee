@@ -40,3 +40,45 @@ VALUES
 ('Product7', 'Discription7', 150, 2, '2017-01-05'),
 ('Product8', 'Discription8', 200, 7, '2018-02-07'),
 ('Product9', 'Discription9', 320, 5, '2018-04-09');
+
+-- DROP TABLE IF EXISTS roles;
+-- CREATE TABLE roles (
+--   id                    BIGINT NOT NULL UNIQUE AUTO_INCREMENT,
+--   name                  VARCHAR(50) NOT NULL,
+--   PRIMARY KEY (id)
+-- );
+--
+-- INSERT INTO roles (name)
+-- VALUES
+-- ('ROLE_ADMIN'), ('ROLE_USER');
+
+-- DROP TABLE IF EXISTS users;
+-- CREATE TABLE users (
+--   id                    BIGINT NOT NULL UNIQUE AUTO_INCREMENT,
+--   login                 varchar (50) NOT NULL UNIQUE,
+--   password              VARCHAR(80) NOT NULL,
+--   PRIMARY KEY (id)
+-- );
+--
+-- INSERT INTO users (login, password)
+-- VALUES
+-- ('admin','123'),
+-- -- password=123
+-- ('user','111');
+-- -- password=111
+
+-- DROP TABLE IF EXISTS users_roles;
+-- CREATE TABLE users_roles (
+--   user_id               bigint NOT NULL,
+--   role_id               bigint NOT NULL,
+--   PRIMARY KEY (user_id, role_id),
+--   FOREIGN KEY (user_id)
+--   REFERENCES users (id),
+--   FOREIGN KEY (role_id)
+--   REFERENCES roles (id)
+-- );
+--
+-- INSERT INTO users_roles (user_id, role_id)
+-- VALUES
+-- (1, 1),
+-- (1, 2);

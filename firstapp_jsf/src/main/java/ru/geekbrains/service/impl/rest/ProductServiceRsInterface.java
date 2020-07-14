@@ -24,17 +24,15 @@ public interface ProductServiceRsInterface {
     List<ProductRepr> findAllProduct();
 
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     void insertProduct(ProductRepr productRepr);
 
     @PUT
-    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     void updateProduct(ProductRepr productRepr);
 
     @DELETE
-    @Path("/{id}/delete")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     void deleteProduct(@PathParam("id") long id);
 
@@ -51,7 +49,7 @@ public interface ProductServiceRsInterface {
 
 
     @GET
-    @Path("/category/{id}")
+    @Path("/{id}/category")
     @Produces(MediaType.APPLICATION_JSON)
     List<ProductRepr> findAllProductByCategoryId(@PathParam("id") long id);
 }

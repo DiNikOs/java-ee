@@ -21,8 +21,17 @@
                 <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/order">Оформить заказ</a></li>
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/login">Вход</a></li>
-                <li class="nav-item"><a class="nav-link" href="/firstapp_jsp/register">Регистрация</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/firstapp_jsp/login">Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/firstapp_jsp/register">Регистрация</a>
+                </li>
+                <li class="nav-item">
+                    <h:form rendered="#{request.userPrincipal != null}">
+                        <h:commandLink action="#{MainController.logout()}" value="Logout #{request.userPrincipal.name}"/>
+                    </h:form>
+                </li>
             </ul>
         </div>
     </nav>

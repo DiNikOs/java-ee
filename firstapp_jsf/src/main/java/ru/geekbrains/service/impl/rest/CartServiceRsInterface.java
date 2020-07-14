@@ -23,17 +23,15 @@ public interface CartServiceRsInterface {
     List<Cart> findAllCart();
 
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     void insertCart(Cart cart);
 
     @PUT
-    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     void updateCart(Cart cart);
 
     @DELETE
-    @Path("/{id}/delete")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     void deleteCart(@PathParam("id") long id);
 

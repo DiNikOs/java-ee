@@ -26,17 +26,15 @@ public interface CategoryServiceRsInterface {
     List<CategoryRepr> findAllCategories();
 
     @POST
-    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     void insertCategory(CategoryRepr categoryRepr);
 
     @PUT
-    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     void updateCategory(CategoryRepr categoryRepr);
 
     @DELETE
-    @Path("/{id}/delete")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     void deleteCategory(@PathParam("id") long id);
 
