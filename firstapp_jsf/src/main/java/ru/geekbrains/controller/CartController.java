@@ -35,7 +35,7 @@ public class CartController implements Serializable {
 
 //    private Collection<OrderItem> cartList;
 
-//    public void preloadTodoList(ComponentSystemEvent componentSystemEvent) {
+//    public void preloadCartList(ComponentSystemEvent componentSystemEvent) {
 //        this.cartList = cart.getItems().values();
 //    }
 
@@ -43,7 +43,7 @@ public class CartController implements Serializable {
         return cart;
     }
 
-    public void setToDo(Cart cart) {
+    public void setCart(Cart cart) {
         this.cart = cart;
     }
 

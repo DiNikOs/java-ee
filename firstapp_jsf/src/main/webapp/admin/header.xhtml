@@ -14,8 +14,6 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -43,12 +41,12 @@
                         <h:link value=" Вход " outcome="login" styleClass="nav-link"/>
                     </li>
                     <li class="nav-item">
-                        <h:link value=" Регистрация "  outcome="user" styleClass="nav-link"/>
+                        <h:link value=" Регистрация " outcome="user" styleClass="nav-link"/>
                     </li>
                     </h:form>
                     <h:form rendered="#{request.userPrincipal != null}">
                     <li class="nav-item">
-                        <h:link rendered="#{request.isUserInRole('ADMIN')}" styleClass="nav-link" outcome="admin/users" >Users</h:link>
+                        <h:link rendered="#{request.isUserInRole('ADMIN')}" outcome="admin/users" styleClass="nav-link">Users</h:link>
                     </li>
                     <li class="nav-item">
                             <h:commandLink action="#{mainController.logout()}" value="Logout #{request.userPrincipal.name}" styleClass="nav-link"/>
