@@ -1,5 +1,4 @@
 use db;
-
 DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
   id            BIGINT PRIMARY KEY AUTO_INCREMENT,
