@@ -1,0 +1,73 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Cart"/>
+</ui:include>
+
+<h:body>
+
+    <!-- HEADER -->
+    <header>
+        <ui:include src="header.xhtml">
+        </ui:include>
+    </header>
+    <!-- /HEADER -->
+    <h1>Корзина</h1>
+
+    <div class="container">
+        <div class="row py-2">
+            <h:form id="CartForm">
+                <div class="col-12">
+                    <h:dataTable value="#{cartController.allToCart}" var="prod"
+                                 styleClass="table table-bordered my-2">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{prod.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{prod.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Description</f:facet>
+                            #{prod.description}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                            #{prod.price}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Category</f:facet>
+                            #{prod.categoryName}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Date</f:facet>
+                            #{prod.localDate}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             action="#{cartController.removeCart(prod)}">
+                                <f:ajax event="click" render="CartForm"/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <ui:include src="WEB-INF/scripts.xhtml">
+        <ui:param name="title" value="Index"/>
+    </ui:include>
+    <!-- /SCRIPTS -->
+
+</h:body>
+
+</html>

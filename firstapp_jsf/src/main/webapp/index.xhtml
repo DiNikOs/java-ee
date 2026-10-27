@@ -1,0 +1,31 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Index"/>
+</ui:include>
+
+<h:body>
+
+    <f:event listener="#{productController.preloadProductList}" type="preRenderView"/>
+
+    <!-- HEADER -->
+    <header>
+        <ui:include src="header.xhtml">
+        </ui:include>
+    </header>
+    <!-- /HEADER -->
+
+
+    <div class="container">
+    <h1> Welcome to marketplace</h1>
+    </div>
+    <!-- SCRIPTS -->
+    <ui:include src="WEB-INF/scripts.xhtml">
+        <ui:param name="title" value="Index"/>
+    </ui:include>
+    <!-- /SCRIPTS -->
+</h:body>
+</html>

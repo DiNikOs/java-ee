@@ -1,0 +1,23 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Error"/>
+</ui:include>
+
+<h:body>
+    <h1>Error!</h1>
+    <li style="display: inline-block"><a href="/firstapp_jsp/main">Вернуться на главную</a></li>
+    <!-- SCRIPTS -->
+    <ui:include src="WEB-INF/scripts.xhtml">
+        <ui:param name="title" value="Index"/>
+    </ui:include>
+    <!-- /SCRIPTS -->
+
+</h:body>
+
+</html>
